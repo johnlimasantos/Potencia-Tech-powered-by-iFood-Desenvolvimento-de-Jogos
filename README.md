@@ -1,7 +1,9 @@
 # 🚀 Potência Tech powered by iFood - Desenvolvimento de Jogos  
 
 <p align="center">
-  <img src="[https://github.com/user-attachments/assets/7cf51aff-5d8a-4256-933e-34c5d3fb98d6](https://github.com/user-attachments/assets/880070f2-d603-41ee-bc7c-1c8bd6f69d20)" alt="Bootcamp Logo" width="300">
+  <a href="https://github.com/user-attachments/assets/880070f2-d603-41ee-bc7c-1c8bd6f69d20">
+    <img src="https://github.com/user-attachments/assets/880070f2-d603-41ee-bc7c-1c8bd6f69d20" alt="Bootcamp Logo" width="300">
+  </a>
 </p>
 
 ### 🎮 Sobre o Bootcamp  
@@ -60,4 +62,4 @@ Durante a jornada, desenvolvi diversos projetos práticos, desafios de código e
 
 ---
 
-🔗 **Repositório do Bootcamp**: [Potência Tech powered by iFood - Desenvolvimento de Jogos](https://github.com/johnlimasantos/Potencia-Tech-powered-by-iFood-Desenvolvimento-de-Jogos.git)  
+🔗 **Repositório do Bootcamp**: [Potência Tech powered by iFood - Desenvolvimento de Jogos](https://github.com/johnlimasantos/Potencia-Tech-powered-by-iFood-Desenvolvimento-de-Jogos.git)
