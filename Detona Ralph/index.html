@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <!-- settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detona Ralph</title>
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Press Start 2P", cursive;
+    }
+
+    /* Container for the entire game */
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-image: url("images/wall.png");
+      background-size: cover;
+    }
+
+    /* Menu at the top */
+    .menu {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 90px;
+      width: 100%;
+      background-color: #000000;
+      color: #ffffff;
+      border-bottom: 5px solid #ffd700;
+    }
+
+    /* Game panel layout */
+    .panel {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Squares where the enemies can appear */
+    .square {
+      height: 150px;
+      width: 150px;
+      border: 1px solid #000000;
+      background-color: #1aeaa5;
+    }
+
+    /* Enemy image in the square */
+    .enemy {
+      background-image: url("images/ralph.png");
+      background-size: cover;
+    }
+
+    /* Lives display */
+    .menu-lives {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Time and score text style */
+    .menu-time h2:nth-child(2),
+    .menu-score h2:nth-child(2) {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="menu">
+      <div class="menu-time">
+        <h2 style="color: red;">Time Left</h2>
+        <h2 id="time-left">60</h2>
+      </div>
+      <div class="menu-score">
+        <h2 style="color: red;">Your Score</h2>
+        <h2 id="score">0</h2>
+      </div>
+      <div class="menu-lives">
+        <img src="images/player.png" alt="foto do jogador" height="60px" />
+        <h2>x3</h2>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-row">
+        <div class="square" id="1"></div>
+        <div class="square" id="2"></div>
+        <div class="square" id="3"></div>
+      </div>
+
+      <div class="panel-row">
+        <div class="square enemy" id="4"></div>
+        <div class="square" id="5"></div>
+        <div class="square" id="6"></div>
+      </div>
+
+      <div class="panel-row">
+        <div class="square" id="7"></div>
+        <div class="square" id="8"></div>
+        <div class="square" id="9"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      view: {
+        squares: document.querySelectorAll(".square"),
+        enemy: document.querySelector(".enemy"),
+        timeLeft: document.querySelector("#time-left"),
+        score: document.querySelector("#score"),
+      },
+      values: {
+        gameVelocity: 1000,
+        hitPosition: 0,
+        result: 0,
+        curretTime: 60,
+      },
+      actions: {
+        timerId: setInterval(randomSquare, 1000),
+        countDownTimerId: setInterval(countDown, 1000),
+      },
+    };
+
+    function countDown() {
+      state.values.curretTime--;
+      state.view.timeLeft.textContent = state.values.curretTime;
+
+      if (state.values.curretTime <= 0) {
+        clearInterval(state.actions.countDownTimerId);
+        clearInterval(state.actions.timerId);
+        alert("Game Over! O seu resultado foi: " + state.values.result);
+      }
+    }
+
+    function playSound(audioName) {
+      let audio = new Audio("audios/" + audioName + ".m4a");
+      audio.volume = 0.2;
+      audio.play();
+    }
+
+    function randomSquare() {
+      state.view.squares.forEach((square) => {
+        square.classList.remove("enemy");
+      });
+
+      let randomNumber = Math.floor(Math.random() * 9);
+      let randomSquare = state.view.squares[randomNumber];
+      randomSquare.classList.add("enemy");
+      state.values.hitPosition = randomSquare.id;
+    }
+
+    function addListenerHitBox() {
+      state.view.squares.forEach((square) => {
+        square.addEventListener("mousedown", () => {
+          if (square.id === state.values.hitPosition) {
+            state.values.result++;
+            state.view.score.textContent = state.values.result;
+            state.values.hitPosition = null;
+            playSound("hit");
+          }
+        });
+      });
+    }
+
+    function initialize() {
+      addListenerHitBox();
+    }
+
+    initialize();
+  </script>
+</body>
+
+</html>

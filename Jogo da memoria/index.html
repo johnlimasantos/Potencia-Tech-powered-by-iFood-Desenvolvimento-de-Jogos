@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória - Frutas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fc1e8a;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background: linear-gradient(325deg, 
+                #03001e 0%, 
+                #7303c0 30%,
+                #ec38bc 70%,
+                #fdeff9 100%
+            );
+            padding: 40px 60px;
+        }
+
+        h2 {
+            font-size: 3em;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .reset {
+            padding: 15px 20px;
+            width: 100%;
+            color: #000;
+            background-color: #fff;
+            font-size: 1.5em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+        }
+
+        .reset:focus {
+            color: #ec38bc;
+            background-color: #262809;
+        }
+
+        .game {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 430px;
+            height: 430px;
+            transform-style: preserve-3d;
+            perspective: 500px;
+        }
+
+        .item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            font-size: 3em;
+            transform: rotateY(180deg);
+            transition: 0.25s;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .item:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #404040;
+            transition: 0.25s;
+            transform: rotateY(0deg);
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+
+        .item.boxOpen {
+            transform: rotateY(0deg);
+        }
+
+        .boxOpen:after, .boxMatch:after {
+            transform: rotateY(180deg);
+        }
+
+        .boxOpen {
+            background-color: #ffe4b5;
+        }
+
+        .boxMatch {
+            background-color: #98fb98;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jogo da Memória</h2>
+        <button class="reset" onclick="window.location.reload()">Reiniciar</button>
+        <div class="game"></div>
+    </div>
+
+    <script>
+        const emojis = [
+            "🍎", "🍎", 
+            "🍌", "🍌",
+            "🍒", "🍒",
+            "🍇", "🍇",
+            "🍍", "🍍",
+            "🥝", "🥝",
+            "🍉", "🍉",
+            "🍓", "🍓",
+        ];
+        let openCards = [];
+        let lockBoard = true; // Bloqueia cliques até as cartas virarem
+
+        let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
+
+        const gameContainer = document.querySelector(".game");
+
+        for (let i = 0; i < emojis.length; i++) {
+            let box = document.createElement("div");
+            box.className = "item boxOpen"; // Começa visível
+            box.innerHTML = shuffleEmojis[i];
+            box.dataset.emoji = shuffleEmojis[i];
+            box.onclick = handleClick;
+            gameContainer.appendChild(box);
+        }
+
+        // Esconder as cartas após 2 segundos
+        setTimeout(() => {
+            document.querySelectorAll(".item").forEach(box => {
+                box.classList.remove("boxOpen");
+                box.innerHTML = ""; // Esconde o emoji
+            });
+            lockBoard = false; // Agora os cliques são permitidos
+        }, 2000);
+
+        function handleClick() {
+            if (lockBoard || openCards.length >= 2 || this.classList.contains("boxOpen")) return;
+
+            this.classList.add("boxOpen");
+            this.innerHTML = this.dataset.emoji;
+            openCards.push(this);
+
+            if (openCards.length === 2) {
+                setTimeout(checkMatch, 500);
+            }
+        }
+
+        function checkMatch() {
+            if (openCards[0].dataset.emoji === openCards[1].dataset.emoji) {
+                openCards[0].classList.add("boxMatch");
+                openCards[1].classList.add("boxMatch");
+            } else {
+                openCards.forEach(card => {
+                    card.classList.remove("boxOpen");
+                    card.innerHTML = ""; // Esconde novamente
+                });
+            }
+            openCards = [];
+
+            if (document.querySelectorAll(".boxMatch").length === emojis.length) {
+                setTimeout(() => alert("Você venceu! 🏆"), 300);
+            }
+        }
+    </script>
+</body>
+</html>
