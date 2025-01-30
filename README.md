@@ -1,7 +1,7 @@
 # 🚀 Potência Tech powered by iFood - Desenvolvimento de Jogos  
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/7cf51aff-5d8a-4256-933e-34c5d3fb98d6" alt="Bootcamp Logo" width="300">
+  <img src="[https://github.com/user-attachments/assets/7cf51aff-5d8a-4256-933e-34c5d3fb98d6](https://github.com/user-attachments/assets/880070f2-d603-41ee-bc7c-1c8bd6f69d20)" alt="Bootcamp Logo" width="300">
 </p>
 
 ### 🎮 Sobre o Bootcamp  
