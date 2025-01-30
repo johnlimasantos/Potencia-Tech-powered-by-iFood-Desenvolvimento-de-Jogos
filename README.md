@@ -15,7 +15,6 @@ Durante a jornada, desenvolvi diversos projetos práticos, desafios de código e
 
 ## 📌 Projetos desenvolvidos  
 
-✅ **Contribuindo em um Projeto Open Source no GitHub**  
 ✅ **Criando sua Primeira Landing Page com HTML e CSS**  
 ✅ **Criando um Jogo do Detona Ralph com JavaScript**  
 ✅ **Construindo um Simulador de Piano com JavaScript**  
