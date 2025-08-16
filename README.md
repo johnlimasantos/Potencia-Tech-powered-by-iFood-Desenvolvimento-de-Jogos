@@ -47,8 +47,7 @@ Durante a jornada, desenvolvi diversos projetos práticos, desafios de código e
 
 ## 🏆 Certificado  
 
-[![Baixar Certificado](https://img.shields.io/badge/CERTIFICADO-Download-blue?style=for-the-badge&logo=adobeacrobatreader)](https://github.com/user-attachments/files/18596833/36813A13.pdf)
-
+[![Baixar Certificado](https://img.shields.io/badge/CERTIFICADO-Download-blue?style=for-the-badge&logo=adobeacrobatreader)](https://github.com/user-attachments/files/21813612/Potencia.Tech.iFood.-.Desenvolvimento.de.Jogos.pdf)
 ---
 
 ## 🛠 Tecnologias utilizadas  
