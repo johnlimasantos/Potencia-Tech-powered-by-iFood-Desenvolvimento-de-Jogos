@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Gamer - Seu Portal de Jogos</title>
     <style>
-        /* Importando uma fonte com pegada tech/gamer do Google Fonts */
+        /* Importando fontes do Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
         /* Reset Básico */
         * {
@@ -15,20 +16,38 @@
             box-sizing: border-box;
         }
 
-        /* Variáveis de Cor para facilitar a customização */
+        /* --- Variáveis de Tema --- */
         :root {
-            --background-color: #0d0d1a; /* Roxo bem escuro/preto */
-            --primary-color: #9f00ff;   /* Roxo vibrante */
-            --secondary-color: #00e5ff; /* Ciano neon */
-            --text-color: #f0f0f0;      /* Branco suave */
-            --card-background: #1a1a2e; /* Fundo dos cards */
+            --font-primary: 'Roboto', sans-serif;
+            --font-display: 'Orbitron', sans-serif;
+        }
+
+        /* Tema Cyberpunk (Padrão) */
+        body.theme-cyberpunk {
+            --background-color: #0d0d1a;
+            --primary-color: #9f00ff;
+            --secondary-color: #00e5ff;
+            --text-color: #f0f0f0;
+            --card-background: #1a1a2e;
+            --font-display: 'Orbitron', sans-serif;
+        }
+
+        /* Tema Fantasia */
+        body.theme-fantasy {
+            --background-color: #1a1a1a;
+            --primary-color: #d4af37;   /* Dourado */
+            --secondary-color: #b8860b; /* Dourado Escuro */
+            --text-color: #e0e0e0;
+            --card-background: #2c2f33;
+            --font-display: 'MedievalSharp', cursive;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--font-primary);
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
         }
 
         .container {
@@ -40,7 +59,7 @@
         /* --- Cabeçalho e Navegação --- */
         .header {
             background-color: rgba(13, 13, 26, 0.8);
-            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+            backdrop-filter: blur(10px);
             padding: 20px 0;
             position: sticky;
             top: 0;
@@ -55,7 +74,7 @@
         }
 
         .logo {
-            font-family: 'Orbitron', sans-serif;
+            font-family: var(--font-display);
             font-size: 2rem;
             font-weight: 700;
             color: var(--secondary-color);
@@ -63,15 +82,8 @@
             text-decoration: none;
         }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 25px; }
         .nav-links a {
             text-decoration: none;
             color: var(--text-color);
@@ -80,229 +92,153 @@
             position: relative;
             transition: color 0.3s;
         }
-
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--secondary-color);
+            content: ''; position: absolute; width: 0; height: 3px;
+            bottom: -5px; left: 0; background-color: var(--secondary-color);
             transition: width 0.3s ease;
         }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--secondary-color); }
+        .nav-links a:hover::after { width: 100%; }
 
         /* --- Seção Principal (Hero) --- */
         .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 80vh; display: flex; align-items: center; justify-content: center;
             text-align: center;
             background: url('https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q=80&w=2069&auto=format&fit=crop') no-repeat center center/cover;
             position: relative;
         }
-        
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(13, 13, 26, 0.7), rgba(13, 13, 26, 1));
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(13, 13, 26, 0.7), var(--background-color));
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
+        .hero-content { position: relative; z-index: 1; }
         .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px var(--primary-color);
+            font-family: var(--font-display);
+            font-size: 4rem; margin-bottom: 20px; text-transform: uppercase;
+            letter-spacing: 3px; text-shadow: 0 0 15px var(--primary-color);
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto; }
         
-        /* Botões */
         .btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: var(--text-color);
-            padding: 15px 35px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 5px;
-            border: 2px solid var(--primary-color);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(159, 0, 255, 0.5);
+            display: inline-block; background: var(--primary-color); color: var(--text-color);
+            padding: 15px 35px; text-decoration: none; font-weight: 700;
+            text-transform: uppercase; border-radius: 5px; border: 2px solid var(--primary-color);
+            transition: all 0.3s ease; box-shadow: 0 0 20px color-mix(in srgb, var(--primary-color) 50%, transparent);
             cursor: pointer;
         }
-
         .btn:hover {
-            background: transparent;
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
+            background: transparent; color: var(--secondary-color); border-color: var(--secondary-color);
+            transform: scale(1.05); box-shadow: 0 0 25px color-mix(in srgb, var(--secondary-color) 70%, transparent);
         }
 
-        /* --- Seções de Conteúdo --- */
-        .section {
-            padding: 60px 0;
-        }
-
+        /* --- Estrutura Geral das Seções --- */
+        .section { padding: 80px 0; }
         .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--secondary-color);
-            text-transform: uppercase;
+            font-family: var(--font-display); font-size: 2.5rem; text-align: center;
+            margin-bottom: 50px; color: var(--secondary-color); text-transform: uppercase;
         }
 
-        /* Grid de Jogos */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
+        /* --- Seção de Jogos --- */
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .game-card {
-            background: var(--card-background);
-            border-radius: 10px;
-            overflow: hidden;
+            background: var(--card-background); border-radius: 10px; overflow: hidden;
             border: 2px solid transparent;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column; padding: 25px;
         }
-
         .game-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(159, 0, 255, 0.3);
+            transform: translateY(-10px); border-color: var(--primary-color);
+            box-shadow: 0 10px 30px color-mix(in srgb, var(--primary-color) 30%, transparent);
+        }
+        .card-content { flex-grow: 1; display: flex; flex-direction: column; text-align: center; }
+        .card-content h3 { font-family: var(--font-display); color: var(--secondary-color); margin-bottom: 15px; }
+        .card-content p { font-size: 0.9rem; color: #ccc; flex-grow: 1; }
+
+        /* --- Seção de Notícias --- */
+        .news-filters { text-align: center; margin-bottom: 40px; }
+        .filter-btn {
+            background: transparent; border: 2px solid var(--primary-color); color: var(--text-color);
+            padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer;
+            font-weight: 700; text-transform: uppercase; transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--primary-color); color: var(--text-color); }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .news-card {
+            background: var(--card-background); padding: 20px; border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+        }
+        .news-card h3 { font-family: var(--font-display); color: var(--secondary-color); margin-bottom: 10px; }
+        .news-card p { font-size: 0.9rem; color: #ccc; margin-bottom: 15px; }
+        .news-card .tag {
+            display: inline-block; background: var(--primary-color); padding: 5px 10px;
+            border-radius: 5px; font-size: 0.8rem; font-weight: 700;
         }
 
-        .card-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-content h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            font-size: 0.9rem;
-            color: #ccc;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-        
-        .btn-ai {
-            background: transparent;
-            color: var(--secondary-color);
+        /* --- Galeria de Trailers --- */
+        .trailer-gallery { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        .main-video-wrapper {
+            width: 100%; max-width: 800px; aspect-ratio: 16 / 9;
+            background: #000; border-radius: 10px; overflow: hidden;
             border: 2px solid var(--secondary-color);
-            padding: 10px 15px;
-            font-weight: 700;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            align-self: flex-start;
         }
+        .main-video-wrapper iframe { width: 100%; height: 100%; border: none; }
+        .thumbnail-list { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .thumbnail {
+            width: 120px; aspect-ratio: 16 / 9; overflow: hidden;
+            border-radius: 5px; cursor: pointer; border: 2px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .thumbnail:hover, .thumbnail.active { transform: scale(1.1); border-color: var(--primary-color); }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
 
-        .btn-ai:hover {
-            background: var(--secondary-color);
-            color: var(--background-color);
-            box-shadow: 0 0 15px var(--secondary-color);
+        /* --- Enquete da Comunidade --- */
+        .poll-container {
+            background: var(--card-background); max-width: 600px; margin: auto;
+            padding: 30px; border-radius: 10px; text-align: center;
         }
+        .poll-option { margin: 15px 0; }
+        .poll-option button {
+            width: 100%; padding: 15px; font-size: 1rem; font-weight: 700;
+            background: transparent; border: 2px solid var(--primary-color);
+            color: var(--text-color); border-radius: 5px; cursor: pointer; transition: all 0.3s;
+        }
+        .poll-option button:hover { background: var(--primary-color); }
+        .poll-results { margin-top: 20px; text-align: left; }
+        .result-bar {
+            background: #333; border-radius: 5px; margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .result-bar-fill {
+            background: var(--secondary-color); height: 30px; line-height: 30px;
+            padding-left: 10px; white-space: nowrap; transition: width 0.5s ease-in-out;
+        }
+        .result-bar-fill span { font-weight: bold; }
 
-        /* --- Seção de Recomendação com IA --- */
-        .ai-recommender {
-            background-color: var(--card-background);
-            padding: 40px;
-            border-radius: 10px;
-            border: 2px solid var(--primary-color);
-            text-align: center;
+        /* --- Seletor de Tema --- */
+        .theme-switcher {
+            position: fixed; top: 100px; right: 20px; z-index: 1001;
+            background: var(--card-background); padding: 10px; border-radius: 50%;
+            border: 2px solid var(--primary-color); cursor: pointer;
         }
-
-        .ai-recommender textarea {
-            width: 100%;
-            max-width: 600px;
-            height: 100px;
-            background-color: var(--background-color);
-            border: 2px solid var(--secondary-color);
-            border-radius: 5px;
-            padding: 15px;
-            color: var(--text-color);
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            resize: vertical;
-        }
-
-        .ai-recommender .btn {
-            margin-bottom: 30px;
-        }
-        
-        #recommendation-result {
-            text-align: left;
-            max-width: 600px;
-            margin: auto;
-            color: #ccc;
-        }
-
-        #recommendation-result h4 {
-            color: var(--secondary-color);
-            font-family: 'Orbitron', sans-serif;
-            margin-top: 15px;
-        }
+        .theme-switcher i { font-size: 1.5rem; color: var(--secondary-color); }
 
         /* --- Rodapé --- */
         .footer {
-            background: var(--card-background);
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 2px solid var(--primary-color);
+            background: var(--card-background); text-align: center; padding: 40px 0;
+            margin-top: 40px; border-top: 2px solid var(--primary-color);
         }
-        
-        .footer .logo {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .footer p {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
+        .footer .logo { font-size: 1.5rem; margin-bottom: 15px; }
+        .footer p { font-size: 0.9rem; color: #aaa; }
     </style>
+    <!-- Ícones do Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body class="theme-cyberpunk">
+
+    <!-- Seletor de Tema -->
+    <div class="theme-switcher" id="theme-toggle">
+        <i class="fas fa-sun"></i>
+    </div>
 
     <!-- Cabeçalho -->
     <header class="header">
@@ -317,8 +253,8 @@
         </div>
     </header>
 
-    <!-- Seção Principal -->
     <main>
+        <!-- Seção Hero -->
         <section class="hero">
             <div class="hero-content">
                 <h1>O Futuro dos Jogos</h1>
@@ -332,43 +268,90 @@
             <div class="container">
                 <h2 class="section-title">Jogos em Destaque</h2>
                 <div class="games-grid">
-                    <!-- Card de Jogo 1 -->
                     <div class="game-card">
                         <div class="card-content">
                             <h3>Cyber Odyssey</h3>
-                            <p data-original-description="Um RPG de ação em um futuro distópico onde a tecnologia e a humanidade colidem. Suas escolhas definem o destino da cidade.">Um RPG de ação em um futuro distópico onde a tecnologia e a humanidade colidem. Suas escolhas definem o destino da cidade.</p>
-                            <button class="btn-ai" data-action="generate-lore">✨ Gerar Lore com IA</button>
+                            <p>Um RPG de ação em um futuro distópico onde a tecnologia e a humanidade colidem.</p>
                         </div>
                     </div>
-                    <!-- Card de Jogo 2 -->
                     <div class="game-card">
                         <div class="card-content">
                             <h3>Chrono Nexus</h3>
-                            <p data-original-description="Viaje pelo tempo neste jogo de estratégia em tempo real. Comande exércitos do passado e do futuro para dominar o campo de batalha.">Viaje pelo tempo neste jogo de estratégia em tempo real. Comande exércitos do passado e do futuro para dominar o campo de batalha.</p>
-                            <button class="btn-ai" data-action="generate-lore">✨ Gerar Lore com IA</button>
+                            <p>Viaje pelo tempo neste jogo de estratégia em tempo real para dominar o campo de batalha.</p>
                         </div>
                     </div>
-                    <!-- Card de Jogo 3 -->
                     <div class="game-card">
                         <div class="card-content">
                             <h3>Arena Champions</h3>
-                            <p data-original-description="O MOBA definitivo que testa suas habilidades e trabalho em equipe. Monte seu time e lute pela glória na arena global.">O MOBA definitivo que testa suas habilidades e trabalho em equipe. Monte seu time e lute pela glória na arena global.</p>
-                            <button class="btn-ai" data-action="generate-lore">✨ Gerar Lore com IA</button>
+                            <p>O MOBA definitivo que testa suas habilidades e trabalho em equipe na arena global.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Recomendação com IA -->
+        <!-- Seção de Notícias -->
+        <section class="section" style="background-color: color-mix(in srgb, var(--background-color) 90%, #fff);">
+            <div class="container">
+                <h2 class="section-title">Últimas Notícias</h2>
+                <div class="news-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="lancamentos">Lançamentos</button>
+                    <button class="filter-btn" data-filter="esports">E-sports</button>
+                    <button class="filter-btn" data-filter="updates">Atualizações</button>
+                </div>
+                <div class="news-grid">
+                    <div class="news-card" data-category="lancamentos">
+                        <h3>Nova expansão de 'Chrono Nexus' anunciada!</h3>
+                        <p>A aguardada expansão "Temporal Rift" chega em dezembro com novas facções e mapas.</p>
+                        <span class="tag">Lançamentos</span>
+                    </div>
+                    <div class="news-card" data-category="esports">
+                        <h3>Finais do Mundial de 'Arena Champions' quebram recordes</h3>
+                        <p>Mais de 3 milhões de espectadores assistiram à final épica entre Team Vortex e Phoenix Rise.</p>
+                        <span class="tag">E-sports</span>
+                    </div>
+                    <div class="news-card" data-category="updates">
+                        <h3>'Cyber Odyssey' recebe patch 2.5 com melhorias gráficas</h3>
+                        <p>A atualização gratuita traz ray tracing e otimizações de performance para a nova geração.</p>
+                        <span class="tag">Atualizações</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria de Trailers -->
         <section class="section">
-            <div class="container ai-recommender">
-                <h2 class="section-title">✨ Encontre seu Próximo Jogo</h2>
-                <p style="max-width: 600px; margin: 0 auto 30px; color: #ccc;">Não sabe o que jogar? Descreva o tipo de jogo que você ama e nossa IA irá sugerir novos títulos para você!</p>
-                <textarea id="game-prompt" placeholder="Ex: 'Eu amo jogos de exploração espacial em mundo aberto com elementos de sobrevivência e construção...'"></textarea>
-                <button id="recommendation-btn" class="btn">Sugerir Jogos</button>
-                <div id="recommendation-result">
-                    <!-- Os resultados da IA aparecerão aqui -->
+            <div class="container">
+                <h2 class="section-title">Trailers em Destaque</h2>
+                <div class="trailer-gallery">
+                    <div class="main-video-wrapper">
+                        <iframe id="main-video" src="https://www.youtube.com/embed/S_w-B2bB-gU" allowfullscreen></iframe>
+                    </div>
+                    <div class="thumbnail-list">
+                        <div class="thumbnail active" data-video-id="S_w-B2bB-gU">
+                            <img src="https://img.youtube.com/vi/S_w-B2bB-gU/0.jpg" alt="Thumbnail 1">
+                        </div>
+                        <div class="thumbnail" data-video-id="uRjdiY2h_3A">
+                            <img src="https://img.youtube.com/vi/uRjdiY2h_3A/0.jpg" alt="Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" data-video-id="x5n__-TXLmY">
+                            <img src="https://img.youtube.com/vi/x5n__-TXLmY/0.jpg" alt="Thumbnail 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enquete da Comunidade -->
+        <section class="section" style="background-color: color-mix(in srgb, var(--background-color) 90%, #fff);">
+            <div class="container">
+                <h2 class="section-title">Enquete da Comunidade</h2>
+                <div class="poll-container" id="poll">
+                    <h3>Qual o gênero mais aguardado de 2025?</h3>
+                    <div class="poll-option"><button data-vote="rpg">RPG de Mundo Aberto</button></div>
+                    <div class="poll-option"><button data-vote="estrategia">Estratégia 4X</button></div>
+                    <div class="poll-option"><button data-vote="moba">MOBA Competitivo</button></div>
                 </div>
             </div>
         </section>
@@ -378,104 +361,93 @@
     <footer class="footer">
         <div class="container">
             <a href="#" class="logo">NEXUS</a>
-            <p>&copy; 2024 Nexus Gamer. Todos os direitos reservados. Onde a sua jornada começa.</p>
+            <p>&copy; 2024 Nexus Gamer. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Função para chamar a API do Gemini com exponential backoff
-        async function callGemini(prompt, retries = 5, delay = 1000) {
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // A chave da API é inserida em tempo de execução
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Lógica do Seletor de Tema ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
 
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        return result.candidates[0].content.parts[0].text;
-                    } else {
-                        // Se a resposta for válida mas sem conteúdo, retorna uma mensagem padrão
-                        console.error("Resposta da API inválida ou sem conteúdo:", result);
-                        return "Não foi possível gerar uma resposta. Tente novamente.";
-                    }
-                } catch (error) {
-                    console.error(`Tentativa ${i + 1} falhou:`, error);
-                    if (i === retries - 1) {
-                        return "Ocorreu um erro ao conectar com a IA. Por favor, tente mais tarde.";
-                    }
-                    await new Promise(res => setTimeout(res, delay));
-                    delay *= 2; // Aumenta o delay para a próxima tentativa
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('theme-cyberpunk')) {
+                    body.classList.replace('theme-cyberpunk', 'theme-fantasy');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    body.classList.replace('theme-fantasy', 'theme-cyberpunk');
+                    icon.classList.replace('fa-moon', 'fa-sun');
                 }
-            }
-        }
-
-        // Feature 1: Gerador de Lore para os jogos
-        document.querySelectorAll('[data-action="generate-lore"]').forEach(button => {
-            button.addEventListener('click', async (event) => {
-                const card = event.target.closest('.game-card');
-                const title = card.querySelector('h3').innerText;
-                const descriptionP = card.querySelector('p');
-                const originalDescription = descriptionP.getAttribute('data-original-description');
-                
-                // Mostra o estado de carregamento
-                descriptionP.innerText = 'Gerando uma nova história... ✨';
-                button.disabled = true;
-
-                const prompt = `Baseado no título "${title}" e na descrição "${originalDescription}", crie uma pequena e empolgante história de introdução (lore) para este jogo. Mantenha o tom épico e misterioso. Responda em português.`;
-                
-                const lore = await callGemini(prompt);
-                
-                // Atualiza o card com o resultado
-                descriptionP.innerText = lore;
-                button.disabled = false;
             });
-        });
 
-        // Feature 2: Recomendador de Jogos
-        const recommendationBtn = document.getElementById('recommendation-btn');
-        const gamePromptInput = document.getElementById('game-prompt');
-        const resultDiv = document.getElementById('recommendation-result');
+            // --- Lógica do Filtro de Notícias ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const newsCards = document.querySelectorAll('.news-card');
 
-        recommendationBtn.addEventListener('click', async () => {
-            const userInput = gamePromptInput.value;
-            if (!userInput.trim()) {
-                resultDiv.innerHTML = "<p>Por favor, descreva o tipo de jogo que você gosta.</p>";
-                return;
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    newsCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // --- Lógica da Galeria de Trailers ---
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainVideo = document.getElementById('main-video');
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    const videoId = thumb.getAttribute('data-video-id');
+                    mainVideo.src = `https://www.youtube.com/embed/${videoId}`;
+                });
+            });
+
+            // --- Lógica da Enquete ---
+            const pollContainer = document.getElementById('poll');
+            let votes = { rpg: 25, estrategia: 18, moba: 32 }; // Votos iniciais de exemplo
+
+            pollContainer.addEventListener('click', function(e) {
+                if (e.target.tagName === 'BUTTON') {
+                    const voteOption = e.target.getAttribute('data-vote');
+                    votes[voteOption]++;
+                    showPollResults();
+                }
+            });
+
+            function showPollResults() {
+                const totalVotes = Object.values(votes).reduce((sum, count) => sum + count, 0);
+                let resultsHtml = '<h3>Resultados:</h3><div class="poll-results">';
+
+                for (const option in votes) {
+                    const percentage = totalVotes === 0 ? 0 : ((votes[option] / totalVotes) * 100).toFixed(1);
+                    const buttonText = pollContainer.querySelector(`[data-vote="${option}"]`).textContent;
+                    resultsHtml += `
+                        <div class="result-bar">
+                            <div class="result-bar-fill" style="width: ${percentage}%;">
+                                <span>${buttonText}: ${percentage}%</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                resultsHtml += '</div>';
+                pollContainer.innerHTML = resultsHtml;
             }
-
-            // Mostra o estado de carregamento
-            resultDiv.innerHTML = '<p>Procurando novos universos para você... ✨</p>';
-            recommendationBtn.disabled = true;
-
-            const prompt = `Aja como um especialista em recomendação de jogos. Baseado na seguinte descrição de um jogador: "${userInput}", sugira 3 nomes de jogos fictícios que ele gostaria. Para cada jogo, forneça uma descrição curta e empolgante de uma ou duas frases. Formate a resposta com o nome do jogo em negrito. Responda em português.`;
-
-            const recommendations = await callGemini(prompt);
-            
-            // Transforma quebras de linha em <br> e negrito markdown em <strong>
-            const formattedHtml = recommendations
-                .replace(/\*\*(.*?)\*\*/g, '<h4>$1</h4>') // Converte **Texto** para <h4>Texto</h4>
-                .replace(/\n/g, '<br>'); // Converte quebras de linha para <br>
-
-            // Atualiza a div com o resultado
-            resultDiv.innerHTML = formattedHtml;
-            recommendationBtn.disabled = false;
         });
-
     </script>
+
 </body>
 </html>
